@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Cadastro de Disciplina</title>
+    </h:head>
+    <h:body>
+        <h3 align="center">Cadastro de Disciplina</h3>
+         <h:form id="frmcaddisciplina" style="text-align: center">            
+             <h:outputLabel value="Nome da Disciplina:"/>&nbsp;<h:inputText value="#{disciplinaBean.nomedisciplina}"/>&nbsp;
+                <h:commandButton value="Voltar" action="index.xhtml?faces-redirect=true"/><br/><br/>
+                <h:commandButton value="Salvar"/>&nbsp;
+                <h:commandButton value="Alterar"/>&nbsp;
+                <h:commandButton value="Excluir"/>&nbsp;
+                <h:commandButton value="Consultar"/><br/>
+        </h:form><br/>
+        <h:form style="text-align: center">
+            <h:outputLabel value="Disciplina:"/>
+            #{disciplinaBean.nomedisciplina}
+        </h:form>
+             
+    </h:body>
+</html>
+

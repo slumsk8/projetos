@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de Professor</title>
+    </h:head>
+    <h:body>
+        <h3 align="center">Cadastro de Professores</h3>
+        <h:form id="frmcadprofessor" style="text-align: center">
+            <h:outputLabel value="ID:"/>&nbsp;<h:inputText value="#{professorBean.idProf}"/><br/>
+            <h:outputLabel value="Nome do Professor:"/>&nbsp;<h:inputText value="#{professorBean.nomeProfessor}"/><br/>
+            <h:outputLabel value="Nome Social:"/>&nbsp;<h:inputText value="#{professorBean.nomeSocial}"/><br/>
+            <h:outputLabel value="Matricula:"/>&nbsp;<h:inputText value="#{professorBean.matProfessor}"/><br/>
+            <h:outputLabel value="Senha:"/>&nbsp;<h:inputText value="#{professorBean.senha}"/><br/>
+            <h:outputLabel value="Coordenador?:"/>&nbsp;
+            <h:selectBooleanCheckbox value="#{professorBean.coord}"/><br/>
+            <h:commandButton value="Voltar" action="index.xhtml?faces-redirect=true"/><br/><br/>
+            <h:commandButton value="Salvar"/>&nbsp;
+            <h:commandButton value="Alterar"/>&nbsp;
+            <h:commandButton value="Excluir"/>&nbsp;
+            <h:commandButton value="Consultar"/><br/>
+        </h:form><br/><br/>
+        <h:form style="text-align: center">
+            <h:outputLabel value="ID:"/>
+                #{professorBean.idProf}<br/>
+            <h:outputLabel value="Nome:"/>
+                #{professorBean.nomeProfessor}<br/>
+            <h:outputLabel value="Social:"/>
+                #{professorBean.nomeSocial}<br/>
+            <h:outputLabel value="Matricula:"/>
+                #{professorBean.matProfessor}<br/>
+                <h:outputLabel value="Coordenador?:"/>
+                <h:outputLabel value="SIM" rendered="#{professorBean.coord == true}"/>
+                <h:outputLabel value="NÃO" rendered="#{professorBean.coord == false}"/><br/>
+            <h:outputLabel value="Senha:"/>
+                #{professorBean.senha}
+        </h:form>
+    </h:body>
+</html>
+
