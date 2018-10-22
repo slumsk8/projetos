@@ -4,26 +4,26 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Cadastro de Disciplina</title>
+        <title>Cadastro de Curso</title>
     </h:head>
     <h:body>
        <center>
-        <h3 align="center">Cadastro de Disciplinas</h3>
-        <h:form id="frmcaddisciplina" style="text-align: center">
+        <h3 align="center">Cadastro de Cursos</h3>
+        <h:form id="frmcadcurso" style="text-align: center">
             <center>
             <p:panelGrid columns="2" style="font-size: 15px">
-                    <p:outputLabel value="Nome da Disciplina:"/><p:inputText value="#{disciplinaBean.disciplina.nomedisciplina}"/>
+                <p:outputLabel value="Nome do Curso:"/><p:inputText value="#{cursoBean.curso.nomecurso}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{disciplinaBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
+            <p:commandButton value="Salvar" action="#{cursoBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
                 <p:commandButton value="Alterar" style="width: 100px; font-size: 15px"/>&nbsp;
                 <p:commandButton value="Excluir" style="width: 100px; font-size: 15px"/>&nbsp;
                 <p:commandButton value="Consultar" style="width: 100px; font-size: 15px"/>&nbsp;
                 <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="index.xhtml?faces-redirect=true"/><br/><br/>
         </h:form><br/>
-        <p:dataTable  value="#{disciplinaBean.disciplinas}" var="d" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 550px">
-            <p:column headerText="Id">#{d.iddisciplina}</p:column>
-            <p:column headerText="Disciplina">#{d.nomedisciplina}</p:column>
+        <p:dataTable  value="#{cursoBean.cursos}" var="c" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 550px">
+            <p:column headerText="Id">#{c.idcurso}</p:column>
+            <p:column headerText="Curso">#{c.nomecurso}</p:column>
         </p:dataTable>
         </center>
     </h:body>

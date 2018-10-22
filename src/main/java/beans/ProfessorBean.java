@@ -1,67 +1,84 @@
 package beans;
 
+import br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Professor;
+import conecta.ProfessorConecta;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@ViewScoped
-public class ProfessorBean {
-    private int idProf;
-    private String nomeProfessor;
-    private String nomeSocial;
-    private String matProfessor;
-    private String senha;
-
-    private boolean coord;
+@SessionScoped
+public class ProfessorBean{
+    private Professor professor = new Professor();
+    private ProfessorConecta con = new ProfessorConecta();
+    private List<Professor> professores = new ArrayList<>();
     
-      public int getIdProf() {
-        return idProf;
+    
+   @PostConstruct
+    public void init(){
+        ProfessorConecta con = new ProfessorConecta();
+        professores = con.listar();
+        professor = new Professor();
     }
-
-    public void setIdProf(int idProf) {
-        this.idProf = idProf;
-    }
-
-    public String getNomeProfessor() {
-        return nomeProfessor;
-    }
-
-    public void setNomeProfessor(String nomeProfessor) {
-        this.nomeProfessor = nomeProfessor;
-    }
-
-    public String getNomeSocial() {
-        return nomeSocial;
-    }
-
-    public void setNomeSocial(String nomeSocial) {
-        this.nomeSocial = nomeSocial;
-    }
-
-    public String getMatProfessor() {
-        return matProfessor;
-    }
-
-    public void setMatProfessor(String matProfessor) {
-        this.matProfessor = matProfessor;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public boolean getCoord() {
-        return coord;
-    }
-
-    public void setCoord(boolean coord) {
-        this.coord = coord;
+   public String salvar(){ 
+        if(professor.getIdprofessor() == null || professor.getIdprofessor() == 0){
+            professor.getNomeprofessor();
+            professor.getNomesocial();
+            professor.getMatriculaprofessor();
+            professor.getSenha();
+            professor.isCoordenador();
+            con.salvar(professor);
+        }
+        if (professor.getIdprofessor() != null || professor.getIdprofessor() > 0){
+            con.alterar(professor);
+            professores = con.listar();
+        }
+       return "/cadprofessor.xhtml?faces-redirect=true";
     }
     
-    public void salvar(){
+    public String editar(Professor p){    
+       this.professor = p;
+       return "/altprofessor.xhtml?faces-redirect=true";
+       //"altprofessor.xhtml?faces-redirect=true";
     }
+    
+    public String novo(){
+        professor = new Professor();
+        return "/cadprofessor.xhtml?faces-redirect=true";
+    }
+        
+    public String excluir(Professor professor){
+        con.remover(professor);
+        professores = con.listar();
+       return "/cadprofessor.xhtml?faces-redirect=true";
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public ProfessorConecta getCon() {
+        return con;
+    }
+
+    public void setCon(ProfessorConecta con) {
+        this.con = con;
+    }
+
+    public List<Professor> getProfessores() {
+        return professores;
+    }
+
+    public void setProfessores(List<Professor> professores) {
+        this.professores = professores;
+    }
+
+    
 }

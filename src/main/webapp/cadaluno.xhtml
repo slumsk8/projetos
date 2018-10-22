@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de Alunos</title>
+    </h:head>
+    <h:body>
+        <center>
+        <h3 align="center">Cadastro de Alunos</h3>
+        <h:form id="frmcadaluno" style="text-align: center">
+            <center>
+                <p:panelGrid columns="2" style="font-size: 15px">
+                    <p:outputLabel value="Nome do Aluno:"/><p:inputText value="#{alunoBean.aluno.nomealuno}"/>
+                    <p:outputLabel value="Nome Social:"/><p:inputText value="#{alunoBean.aluno.nomesocial}"/>
+                    <p:outputLabel value="Matricula:"/><p:inputText value="#{alunoBean.aluno.mataluno}"/>
+                    <p:outputLabel value="Senha:"/><p:inputText value="#{alunoBean.aluno.senha}"/>
+            </p:panelGrid><br/>
+            </center>
+                <p:commandButton value="Novo" action="#{alunoBean.novo()}" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Salvar" action="#{alunoBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Alterar" action="altaluno.xhtml?faces-redirect=true" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Excluir" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Consultar" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="index.xhtml?faces-redirect=true"/><br/><br/>
+        </h:form><br/>
+        <p:dataTable  value="#{alunoBean.alunos}" var="a" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 550px">
+            <p:column headerText="Id">#{a.idaluno}</p:column>
+            <p:column headerText="Aluno">#{a.nomesocial}</p:column>
+            <p:column headerText="Matricula">#{a.mataluno}</p:column>
+        </p:dataTable>
+        </center>
+    </h:body>
+</html>
+

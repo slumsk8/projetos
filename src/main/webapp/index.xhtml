@@ -2,19 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Projeto Integrador 3</title>
     </h:head>
     <h:body>
-        <h2 align="center">Biblioteca de Projetos Integradores da Cairu</h2>
-        <h:form style="text-align: center">
-            <h:form id="frmIndex" style="text-align: center">
-                <h:outputLabel value="CADASTRO"/><br/><br/>
-                <h:commandButton style="height: 30px; width: 100px"  value="Professores" action="cadprofessor.xhtml?faces-redirect=true"/><br/><br/>
-                <h:commandButton style="height: 30px; width: 100px" value="Disciplinas" action="caddisciplina.xhtml?faces-redirect=true"/><br/>
-            </h:form>
-        </h:form>
+        <center>
+            <h2>Biblioteca de Projetos Integradores da Cairu</h2>
+            <h:form id="frmindex">
+                <h2>Cadastro</h2>
+                <p:panelGrid columns="7" >
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Login" action="login.xhtml?faces-redirect=true"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Professor" action="cadprofessor.xhtml?faces-redirect=true"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Aluno" action="cadaluno.xhtml?faces-redirect=true"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Disciplina" action="caddisciplina.xhtml?faces-redirect=true"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Curso" action="cadcurso.xhtml?faces-redirect=true"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Arquivos"/>
+                    <p:commandButton style="width: 100px; font-size: 15px" value="Projetos"/>
+                </p:panelGrid>
+            </h:form><br/>
+        </center>
     </h:body>
 </html>
 
