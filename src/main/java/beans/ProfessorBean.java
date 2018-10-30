@@ -1,61 +1,69 @@
 package beans;
 
 import br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Professor;
-import conecta.ProfessorConecta;
+import dao.GenericDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @SessionScoped
 public class ProfessorBean{
     private Professor professor = new Professor();
-    private ProfessorConecta con = new ProfessorConecta();
+    private GenericDao<Professor> dao = new GenericDao<Professor>();
     private List<Professor> professores = new ArrayList<>();
     
     
-   @PostConstruct
+    @PostConstruct
     public void init(){
-        ProfessorConecta con = new ProfessorConecta();
-        professores = con.listar();
+        professores = dao.listar(professor);
         professor = new Professor();
     }
-   public String salvar(){ 
-        if(professor.getIdprofessor() == null || professor.getIdprofessor() == 0){
-            professor.getNomeprofessor();
-            professor.getNomesocial();
-            professor.getMatriculaprofessor();
-            professor.getSenha();
-            professor.isCoordenador();
-            con.salvar(professor);
-        }
+    
+    
+    
+    //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
+    //Esse método salvar serve para salvar as alterações também
+    public String salvar(){
+       if(professor.getIdprofessor() == null || professor.getIdprofessor() == 0){        
+            dao.salvar(professor);
+            novo();
+       }            
         if (professor.getIdprofessor() != null || professor.getIdprofessor() > 0){
-            con.alterar(professor);
-            professores = con.listar();
-        }
-       return "/cadprofessor.xhtml?faces-redirect=true";
+            dao.alterar(professor);
+            professores = dao.listar(professor);
+            novo();
+       }    
+            professores = dao.listar(professor);
+            return "cadprofessor.xhtml?faces-redirect=true";
     }
     
-    public String editar(Professor p){    
-       this.professor = p;
-       return "/altprofessor.xhtml?faces-redirect=true";
-       //"altprofessor.xhtml?faces-redirect=true";
+    //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
+    public void prepararAlterar(Professor p){
+        this.professor = p;
     }
     
+    public String remover(Professor p){
+        dao.deletar(p);
+        professores = dao.listar(professor);
+        return "professor/cadprofessor.xhtml?faces-redirect=true";
+    }
+    
+    public void listar(){
+       professores = dao.listar(professor);
+    }
+    
+    //Método que inicia um novo objeto em determinados procedimentos
     public String novo(){
         professor = new Professor();
-        return "/cadprofessor.xhtml?faces-redirect=true";
-    }
-        
-    public String excluir(Professor professor){
-        con.remover(professor);
-        professores = con.listar();
-       return "/cadprofessor.xhtml?faces-redirect=true";
+        return "cadprofessor.xhtml?faces-redirect=true";
     }
 
+    
+    
+    //GETTERS E SETTERS
     public Professor getProfessor() {
         return professor;
     }
@@ -63,15 +71,7 @@ public class ProfessorBean{
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
-
-    public ProfessorConecta getCon() {
-        return con;
-    }
-
-    public void setCon(ProfessorConecta con) {
-        this.con = con;
-    }
-
+    
     public List<Professor> getProfessores() {
         return professores;
     }
@@ -79,6 +79,4 @@ public class ProfessorBean{
     public void setProfessores(List<Professor> professores) {
         this.professores = professores;
     }
-
-    
 }

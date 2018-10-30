@@ -1,7 +1,7 @@
 package beans;
 
 import br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Aluno;
-import conecta.AlunoConecta;
+import dao.GenericDao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,62 +14,60 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class AlunoBean implements Serializable{
     private Aluno aluno = new Aluno();
-    private AlunoConecta con = new AlunoConecta();
-    private List<Aluno> alunos = new ArrayList<>();
+    private GenericDao<Aluno> dao = new GenericDao<Aluno>();
+    private List<Aluno> alunos = new ArrayList();
 
-   @PostConstruct
-   public void init(){
-       AlunoConecta con = new AlunoConecta();
-       alunos = con.listar();
-       aluno = new Aluno();
-   }
+    @PostConstruct
+    public void init(){
+        alunos = dao.listar(aluno);
+        aluno = new Aluno();
+    }
     
-   public String salvar(){ 
+    
+    //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
+    //Esse método salvar serve para salvar as alterações também
+    public String salvar(){
         if(aluno.getIdaluno() == null || aluno.getIdaluno() == 0){
-            aluno.getNomealuno();
-            aluno.getNomesocial();
-            aluno.getMataluno();
-            aluno.getSenha();
-            con.salvar(aluno);
+            dao.salvar(aluno);
+            aluno = new Aluno();
         }
-        if (aluno.getIdaluno()!= null || aluno.getIdaluno()> 0){
-            con.alterar(aluno);
-            alunos = con.listar();
+        if(aluno.getIdaluno() != null || aluno.getIdaluno() > 0){
+            dao.alterar(aluno);
+            aluno = new Aluno();
         }
-       return "/cadaluno.xhtml?faces-redirect=true";
+            alunos = dao.listar(aluno);
+            return "cadaluno.xhtml?faces-redirect=true";
     }
     
-    public String editar(Aluno a){    
-       this.aluno = a;
-       return "/altaluno.xhtml?faces-redirect=true";
-       //"altprofessor.xhtml?faces-redirect=true";
+    //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
+    public void prepararAlterar(Aluno a){
+        this.aluno = a;
     }
     
+    public String remover(Aluno a){
+        dao.deletar(a);
+        alunos = dao.listar(aluno);
+        return "aluno/cadaluno.xhtml?faces-redirect=true";
+    }
+    
+    public void listar(){
+        alunos = dao.listar(aluno);
+    }
+    
+    //Método que inicia um novo objeto em determinados procedimentos
     public String novo(){
         aluno = new Aluno();
-        return "/cadaluno.xhtml?faces-redirect=true";
+        return "cadaluno.xhtml?faces-redirect=true";
     }
-        
-    public String excluir(Aluno aluno){
-        con.remover(aluno);
-        alunos = con.listar();
-       return "/cadaluno.xhtml?faces-redirect=true";
-    }
-
+   
+    
+    //GETTERS E SETTERS    
     public Aluno getAluno() {
         return aluno;
     }
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
-    }
-
-    public AlunoConecta getCon() {
-        return con;
-    }
-
-    public void setCon(AlunoConecta con) {
-        this.con = con;
     }
 
     public List<Aluno> getAlunos() {
@@ -79,4 +77,10 @@ public class AlunoBean implements Serializable{
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
+   
+       
+   
+   
+   
+   
 }

@@ -2,14 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Alterar dados professor</title>
+        <meta lang="UTF-8"/>
+        <title>Cadastro de Professores</title>
     </h:head>
     <h:body>
         <center>
-        <h3 align="center">Alterar Dados Professor</h3>
-        <h:form id="frmaltprofessor" style="text-align: center">
+        <h3 align="center">Cadastro de Professor</h3>
+        <h:form id="frmcadprofessor" style="text-align: center">
             <center>
                 <p:panelGrid columns="2" style="font-size: 15px">
                     <p:outputLabel value="Nome do Professor:"/><p:inputText value="#{professorBean.professor.nomeprofessor}"/>
@@ -20,21 +22,19 @@
                     <p:selectBooleanCheckbox value="#{professorBean.professor.coordenador}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{professorBean.salvar()}" style="width: 100px; font-size: 15px" />&nbsp;
-                <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="cadprofessor.xhtml?faces-redirect=true"/><br/><br/>
+            <p:commandButton value="Novo"  action="#{professorBean.novo()}" style="width: 100px; font-size: 15px" />&nbsp;
+            <p:commandButton value="Salvar" action="#{professorBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Alterar" action="altprofessor.xhtml?faces-redirect=true" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Consultar" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="/index.xhtml?faces-redirect=true"/><br/><br/>
         </h:form><br/>
         <p:dataTable editingRow="true" value="#{professorBean.professores}" var="p" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 850px">
+            <p:column headerText="Id">#{p.idprofessor}</p:column>
             <p:column headerText="Professor">#{p.nomesocial}</p:column>
             <p:column headerText="Matricula">#{p.matriculaprofessor}</p:column>
             <p:column headerText="Coordenador?">
                 <p:outputLabel value="SIM" rendered="#{p.coordenador == true}"/>
                 <p:outputLabel value="NÃO" rendered="#{p.coordenador == false}"/>
-            </p:column>
-            <p:column headerText="Ações">
-                <h:form>
-                    <h:commandLink value="Alterar" action="#{professorBean.editar(p)}"/>&nbsp;
-                    <h:commandLink value="Excluir" action="#{professorBean.excluir(p)}"/>
-                </h:form>
             </p:column>
         </p:dataTable>
         </center>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Alterar dados cursos</title>
+    </h:head>
+    <h:body>
+        <center>
+        <h3 align="center">Alterar Dados Cursos</h3>
+        <h:form id="frmaltdisciplina" style="text-align: center">
+            <center>
+                <p:panelGrid columns="2" style="font-size: 15px">
+                    <p:outputLabel value="Nome da Disciplina:"/><p:inputText value="#{cursoBean.curso.nomecurso}"/>
+            </p:panelGrid><br/>
+            </center>
+            <p:commandButton value="Salvar" action="#{cursoBean.salvar()}" style="width: 100px; font-size: 15px" />&nbsp;
+            <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="#{cursoBean.novo()}"/><br/><br/>
+        </h:form><br/>
+        <p:dataTable value="#{cursoBean.cursos}" var="c" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 850px">
+            <p:column headerText="Disciplina">#{c.nomecurso}</p:column>
+            <p:column headerText="Ações">
+                <h:form>
+                    <h:commandLink value="Alterar" action="#{cursoBean.prepararAlterar(c)}"/>&nbsp;
+                    <h:commandLink value="Excluir" action="#{cursoBean.remover(c)}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        </center>
+    </h:body>
+</html>
+

@@ -15,11 +15,11 @@
                     <p:outputLabel value="Nome da Disciplina:"/><p:inputText value="#{disciplinaBean.disciplina.nomedisciplina}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{disciplinaBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
-                <p:commandButton value="Alterar" style="width: 100px; font-size: 15px"/>&nbsp;
-                <p:commandButton value="Excluir" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Novo" action="#{disciplinaBean.novo()}" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Salvar" action="#{disciplinaBean.salvar()}" style="width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Alterar" action="altdisciplina.xhtml?faces-redirect=true" style="width: 100px; font-size: 15px"/>&nbsp;
                 <p:commandButton value="Consultar" style="width: 100px; font-size: 15px"/>&nbsp;
-                <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="index.xhtml?faces-redirect=true"/><br/><br/>
+                <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="/index.xhtml?faces-redirect=true"/><br/><br/>
         </h:form><br/>
         <p:dataTable  value="#{disciplinaBean.disciplinas}" var="d" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 550px">
             <p:column headerText="Id">#{d.iddisciplina}</p:column>

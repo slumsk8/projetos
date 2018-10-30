@@ -15,7 +15,7 @@ import javax.persistence.Table;
 ,@NamedQuery(name = "Aluno.findByMat",query = "SELECT a FROM Aluno a WHERE a.mataluno = :mataluno")
 ,@NamedQuery(name = "Aluno.findBySenha",query = "SELECT a FROM Aluno a WHERE a.senha = :senha")})
 
-public class Aluno implements Serializable{
+public class Aluno implements EntidadeBase, Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,5 +67,10 @@ public class Aluno implements Serializable{
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public Integer getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
