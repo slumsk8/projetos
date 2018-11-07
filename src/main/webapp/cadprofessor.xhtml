@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta lang="UTF-8"/>
+        <title>Cadastro de Professores</title>
+    </h:head>
+    <h:body>
+        <center>
+        <h3 style="font-family: monospace ; font-size: 30px" align="center">Cadastro de Professor</h3>
+        
+        <h:form id="frmcadprofessor" style="font-family: monospace ; text-align: center">
+            <center>
+                <p:panelGrid columns="2" style="font-size: 15px">
+                    <p:outputLabel style="font-family: monospace" value="Nome do Professor:"/>
+                    <p:inputText style="font-family: monospace" value="#{professorBean.professor.nomeprofessor}"/>
+                    
+                    <p:outputLabel style="font-family: monospace" value="Nome Social:"/>
+                    <p:inputText style="font-family: monospace" value="#{professorBean.professor.nomesocial}"/>
+                    
+                    <p:outputLabel style="font-family: monospace" value="Matricula:"/>
+                    <p:inputText style="font-family: monospace" value="#{professorBean.professor.matriculaprofessor}"/>
+                    
+                    <p:outputLabel style="font-family: monospace" value="Senha:"/>
+                    <p:inputText style="font-family: monospace" value="#{professorBean.professor.senha}"/>
+                    
+                    <p:outputLabel style="font-family: monospace" value="Coordenador?:"/>
+                    <p:selectBooleanCheckbox style="font-family: monospace" value="#{professorBean.professor.coordenador}"/>
+                </p:panelGrid><br/>
+            </center>
+                <p:commandButton value="Novo" icon="ui-icon-document" action="#{professorBean.novo()}" style="font-family: monospace ; width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Salvar" icon="ui-icon-disk" action="#{professorBean.salvar()}" style="font-family: monospace ; width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-w" style="font-family: monospace ; width: 100px; font-size: 15px" action="index.xhtml?faces-redirect=true"/><br/><br/>
+        </h:form><br/>
+        
+        <p:dataTable editingRow="true" value="#{professorBean.professores}" var="p" emptyMessage="Tabela Vazia" style="font-family: monospace ; text-align: center; font-size: 15px; width: 850px">
+            <p:column style="font-family: monospace" headerText="Id">#{p.idprofessor}</p:column>
+            <p:column style="font-family: monospace" headerText="Professor">#{p.nomesocial}</p:column>
+            <p:column style="font-family: monospace" headerText="Matricula">#{p.matriculaprofessor}</p:column>
+            <p:column style="font-family: monospace" headerText="Coordenador?">
+                <p:outputLabel style="font-family: monospace" value="SIM" rendered="#{p.coordenador == true}"/>
+                <p:outputLabel style="font-family: monospace" value="NÃO" rendered="#{p.coordenador == false}"/>
+            </p:column>
+            <p:column style="font-family: monospace" headerText="Ações">
+                <h:form>
+                    <h:commandLink style="font-family: monospace" value="Alterar" action="#{professorBean.prepararAlterar(p)}"/>&nbsp;
+                    <h:commandLink style="font-family: monospace" value="Excluir" action="#{professorBean.remover(p)}"/>&nbsp;
+                    <h:commandLink style="font-family: monospace" value="Cancelar" action="#{professorBean.novo()}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        </center>
+    </h:body>
+</html>
+

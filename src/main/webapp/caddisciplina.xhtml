@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de Disciplina</title>
+    </h:head>
+    <h:body>
+       <center>
+        <h3 style="font-family: monospace ; font-size: 30px" align="center">Cadastro de Disciplinas</h3>
+       
+        <h:form id="frmcaddisciplina" style="font-family: monospace ; text-align: center">
+            <center>
+            <p:panelGrid columns="2" style="font-family: monospace ; font-size: 15px">
+                    <p:outputLabel style="font-family: monospace" value="Nome da Disciplina:"/>
+                    <p:inputText style="font-family: monospace" value="#{disciplinaBean.disciplina.nomedisciplina}"/>
+            </p:panelGrid><br/>
+            </center>
+                <p:commandButton value="Novo" action="#{disciplinaBean.novo()}" style="font-family: monospace ; width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Salvar" action="#{disciplinaBean.salvar()}" style="font-family: monospace ; width: 100px; font-size: 15px"/>&nbsp;
+                <p:commandButton value="Voltar" style="font-family: monospace ; width: 100px; font-size: 15px" action="index.xhtml?faces-redirect=true"/><br/><br/>
+        </h:form><br/>
+        
+        <p:dataTable  value="#{disciplinaBean.disciplinas}" var="d" emptyMessage="Tabela Vazia" style="font-family: monospace ; text-align: center; font-size: 15px; width: 550px">
+            <p:column style="font-family: monospace" headerText="Id">#{d.iddisciplina}</p:column>
+            <p:column style="font-family: monospace" headerText="Disciplina">#{d.nomedisciplina}</p:column><p:column headerText="Ações">
+                <h:form>
+                    <h:commandLink value="Alterar" action="#{disciplinaBean.prepararAlterar(d)}"/>&nbsp;
+                    <h:commandLink value="Excluir" action="#{disciplinaBean.remover(d)}"/>&nbsp;
+                    <h:commandLink value="Cancelar" action="#{disciplinaBean.novo()}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+        </center>
+    </h:body>
+</html>
+

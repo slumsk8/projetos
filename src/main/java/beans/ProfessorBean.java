@@ -14,6 +14,7 @@ public class ProfessorBean{
     private Professor professor = new Professor();
     private GenericDao<Professor> dao = new GenericDao<Professor>();
     private List<Professor> professores = new ArrayList<>();
+    private List<Professor> busca = new ArrayList<>();
     
     
     @PostConstruct
@@ -27,18 +28,21 @@ public class ProfessorBean{
     //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
     //Esse método salvar serve para salvar as alterações também
     public String salvar(){
-       if(professor.getIdprofessor() == null || professor.getIdprofessor() == 0){        
+        if(professor.getIdprofessor() == null || professor.getIdprofessor() == 0){
             dao.salvar(professor);
             novo();
-       }            
-        if (professor.getIdprofessor() != null || professor.getIdprofessor() > 0){
+        }else if(professor.getIdprofessor()!= null || professor.getIdprofessor() > 0){
             dao.alterar(professor);
-            professores = dao.listar(professor);
             novo();
-       }    
+        }
             professores = dao.listar(professor);
             return "cadprofessor.xhtml?faces-redirect=true";
-    }
+       }            
+    
+    /*public String alterar(){
+            professores = dao.listar(professor);
+            return "cadprofessor.xhtml?faces-redirect=true";
+       }*/
     
     //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
     public void prepararAlterar(Professor p){
@@ -48,7 +52,7 @@ public class ProfessorBean{
     public String remover(Professor p){
         dao.deletar(p);
         professores = dao.listar(professor);
-        return "professor/cadprofessor.xhtml?faces-redirect=true";
+        return "cadprofessor.xhtml?faces-redirect=true";
     }
     
     public void listar(){
@@ -59,6 +63,10 @@ public class ProfessorBean{
     public String novo(){
         professor = new Professor();
         return "cadprofessor.xhtml?faces-redirect=true";
+    }
+    
+    public void buscarPorNome(){
+        busca = dao.listarPorNome(professor);
     }
 
     
@@ -78,5 +86,13 @@ public class ProfessorBean{
 
     public void setProfessores(List<Professor> professores) {
         this.professores = professores;
+    }
+
+    public List<Professor> getBusca() {
+        return busca;
+    }
+
+    public void setBusca(List<Professor> busca) {
+        this.busca = busca;
     }
 }

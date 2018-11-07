@@ -1,6 +1,7 @@
 package br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,18 +19,17 @@ public class Disciplina implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer iddisciplina;
-    private String nomedisciplina;
+    @Column (name = "iddisciplina")
+    private Long iddisciplina;
     
-    public void Disciplina(){
-        
-    }
+    @Column(unique = true, length = 80)
+    private String nomedisciplina;
 
-    public Integer getIddisciplina() {
+    public Long getIddisciplina() {
         return iddisciplina;
     }
 
-    public void setIddisciplina(Integer iddisciplina) {
+    public void setIddisciplina(Long iddisciplina) {
         this.iddisciplina = iddisciplina;
     }
 
@@ -40,7 +40,6 @@ public class Disciplina implements Serializable{
     public void setNomedisciplina(String nomedisciplina) {
         this.nomedisciplina = nomedisciplina;
     }
-    
     
     
     

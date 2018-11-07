@@ -1,6 +1,7 @@
 package br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,19 +18,17 @@ import javax.persistence.Table;
 public class Curso implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idcurso;
+    @Column(name = "idcurso")
+    private Long idcurso;
+    
+    @Column(unique = true, nullable = true, length = 150)
     private String nomecurso;
-    
-    
-    public void Curso(){
-        
-    }
 
-    public Integer getIdcurso() {
+    public Long getIdcurso() {
         return idcurso;
     }
 
-    public void setIdcurso(Integer idcurso) {
+    public void setIdcurso(Long idcurso) {
         this.idcurso = idcurso;
     }
 

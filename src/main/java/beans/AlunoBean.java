@@ -2,7 +2,6 @@ package beans;
 
 import br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Aluno;
 import dao.GenericDao;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -12,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class AlunoBean implements Serializable{
+public class AlunoBean {
     private Aluno aluno = new Aluno();
     private GenericDao<Aluno> dao = new GenericDao<Aluno>();
     private List<Aluno> alunos = new ArrayList();
@@ -27,17 +26,23 @@ public class AlunoBean implements Serializable{
     //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
     //Esse método salvar serve para salvar as alterações também
     public String salvar(){
-        if(aluno.getIdaluno() == null || aluno.getIdaluno() == 0){
+            if(aluno.getIdaluno() == null || aluno.getIdaluno() == 0){
             dao.salvar(aluno);
-            aluno = new Aluno();
-        }
-        if(aluno.getIdaluno() != null || aluno.getIdaluno() > 0){
+            novo();
+        }else if(aluno.getIdaluno()!= null || aluno.getIdaluno() > 0){
             dao.alterar(aluno);
-            aluno = new Aluno();
+            novo();
         }
             alunos = dao.listar(aluno);
             return "cadaluno.xhtml?faces-redirect=true";
-    }
+       }            
+    
+    /*public String alterar(){
+            dao.alterar(aluno);
+            aluno = new Aluno();
+            alunos = dao.listar(aluno);
+            return "cadaluno.xhtml?faces-redirect=true";
+    }*/
     
     //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
     public void prepararAlterar(Aluno a){
@@ -47,7 +52,7 @@ public class AlunoBean implements Serializable{
     public String remover(Aluno a){
         dao.deletar(a);
         alunos = dao.listar(aluno);
-        return "aluno/cadaluno.xhtml?faces-redirect=true";
+        return "cadaluno.xhtml?faces-redirect=true";
     }
     
     public void listar(){

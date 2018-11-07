@@ -26,17 +26,21 @@ public class DisciplinaBean implements Serializable{
     //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
     //Esse método salvar serve para salvar as alterações também
     public String salvar(){
-        if(disciplina.getIddisciplina()== null || disciplina.getIddisciplina() == 0){
+        if(disciplina.getIddisciplina() == null || disciplina.getIddisciplina() == 0){
             dao.salvar(disciplina);
             disciplina = new Disciplina();
-        }
-        if(disciplina.getIddisciplina() != null || disciplina.getIddisciplina() > 0){
+        }else if(disciplina.getIddisciplina() != null || disciplina.getIddisciplina() > 0){
             dao.alterar(disciplina);
             disciplina = new Disciplina();
         }
             disciplinas = dao.listar(disciplina);
-            return "/index.xhtml?faces-redirect=true";
-    }
+            return "caddisciplina.xhtml?faces-redirect=true";
+        }
+    
+    /*public String alterar(){
+            disciplinas = dao.listar(disciplina);
+            return "caddisciplina.xhtml?faces-redirect=true";
+        }*/
     
     //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
     public void prepararAlterar(Disciplina d){
@@ -46,7 +50,7 @@ public class DisciplinaBean implements Serializable{
     public String remover(Disciplina d){
         dao.deletar(d);
         disciplinas = dao.listar(disciplina);
-        return "disciplina/cadsiciplina.xhtml?faces-redirect=true";
+        return "cadsiciplina.xhtml?faces-redirect=true";
     }
     
     public void listar(){

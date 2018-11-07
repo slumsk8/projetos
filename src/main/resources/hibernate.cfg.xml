@@ -6,7 +6,10 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pitres?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <property name="hobernate.connection.password"></property>
     <property name="hibernate.hbm2ddl.auto">update</property>
+    
+    
     <mapping class="br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Professor"/>
     <mapping class="br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Disciplina"/>
     <mapping class="br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Aluno"/>

@@ -15,7 +15,7 @@
                     <p:outputLabel value="Nome da Disciplina:"/><p:inputText value="#{cursoBean.curso.nomecurso}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{cursoBean.salvar()}" style="width: 100px; font-size: 15px" />&nbsp;
+            <p:commandButton value="Salvar" action="#{cursoBean.alterar()}" style="width: 100px; font-size: 15px" />&nbsp;
             <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="#{cursoBean.novo()}"/><br/><br/>
         </h:form><br/>
         <p:dataTable value="#{cursoBean.cursos}" var="c" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 850px">

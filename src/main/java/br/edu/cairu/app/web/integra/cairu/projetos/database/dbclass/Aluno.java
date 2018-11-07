@@ -1,6 +1,7 @@
 package br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,25 +16,30 @@ import javax.persistence.Table;
 ,@NamedQuery(name = "Aluno.findByMat",query = "SELECT a FROM Aluno a WHERE a.mataluno = :mataluno")
 ,@NamedQuery(name = "Aluno.findBySenha",query = "SELECT a FROM Aluno a WHERE a.senha = :senha")})
 
-public class Aluno implements EntidadeBase, Serializable{
+public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idaluno;
-    private String mataluno;
-    private String nomealuno;
-    private String nomesocial;
-    private String senha;
+    @Column (name = "idaluno")
+    private Long idaluno;
     
-    public void Aluno(){
-        
-    }
+    @Column (unique = true, length = 8)
+    private String mataluno;
+    
+    @Column (unique = true, length = 80)
+    private String nomealuno;
+    
+    @Column (unique = true, length = 80)
+    private String nomesocial;
+    
+    @Column (length = 8)
+    private String senha;
 
-    public Integer getIdaluno() {
+    public Long getIdaluno() {
         return idaluno;
     }
 
-    public void setIdaluno(Integer idaluno) {
+    public void setIdaluno(Long idaluno) {
         this.idaluno = idaluno;
     }
 
@@ -68,9 +74,8 @@ public class Aluno implements EntidadeBase, Serializable{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    @Override
-    public Integer getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+    
+ 
 }

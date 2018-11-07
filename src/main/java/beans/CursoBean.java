@@ -26,17 +26,21 @@ public class CursoBean implements Serializable{
     //MÉTODOS PARA MANIPULAÇÃO NO BANCO DE DADOS
     //Esse método salvar serve para salvar as alterações também
     public String salvar(){
-        if(curso.getIdcurso()== null || curso.getIdcurso()== 0){
+        if(curso.getIdcurso() == null || curso.getIdcurso() == 0){
             dao.salvar(curso);
             curso = new Curso();
-        }
-        if(curso.getIdcurso()!= null || curso.getIdcurso()> 0){
+        }else if(curso.getIdcurso() != null || curso.getIdcurso() > 0){
             dao.alterar(curso);
             curso = new Curso();
         }
             cursos = dao.listar(curso);
             return "cadcurso.xhtml?faces-redirect=true";
-    }
+        }
+    
+    /*public String alterar(){
+            cursos = dao.listar(curso);
+            return "cadcurso.xhtml?faces-redirect=true";
+        }*/
     
     //Importa os dados do banco para o formulário através da tabela onde as informações estão listadas
     public void prepararAlterar(Curso c){
@@ -46,7 +50,7 @@ public class CursoBean implements Serializable{
     public String remover(Curso c){
         dao.deletar(c);
         cursos = dao.listar(curso);
-        return "curso/cadcurso.xhtml?faces-redirect=true";
+        return "cadcurso.xhtml?faces-redirect=true";
     }
     
     public void listar(){

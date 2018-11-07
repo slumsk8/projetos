@@ -15,7 +15,7 @@
                     <p:outputLabel value="Nome da Disciplina:"/><p:inputText value="#{disciplinaBean.disciplina.nomedisciplina}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{disciplinaBean.salvar()}" style="width: 100px; font-size: 15px" />&nbsp;
+            <p:commandButton value="Salvar" action="#{disciplinaBean.alterar()}" style="width: 100px; font-size: 15px" />&nbsp;
             <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="#{disciplinaBean.novo()}"/><br/><br/>
         </h:form><br/>
         <p:dataTable value="#{disciplinaBean.disciplinas}" var="d" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 850px">

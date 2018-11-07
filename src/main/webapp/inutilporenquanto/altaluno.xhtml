@@ -9,6 +9,7 @@
     <h:body>
         <center>
         <h3 align="center">Alterar Dados Alunos</h3>
+        
         <h:form id="frmaltaluno" style="text-align: center">
             <center>
                 <p:panelGrid columns="2" style="font-size: 15px">
@@ -18,9 +19,10 @@
                     <p:outputLabel value="Senha:"/><p:inputText value="#{alunoBean.aluno.senha}"/>
             </p:panelGrid><br/>
             </center>
-            <p:commandButton value="Salvar" action="#{alunoBean.salvar()}" style="width: 100px; font-size: 15px" />&nbsp;
+            <p:commandButton value="Salvar" action="#{alunoBean.alterar()}" style="width: 100px; font-size: 15px" />&nbsp;
             <p:commandButton value="Voltar" style="width: 100px; font-size: 15px" action="#{alunoBean.novo()}"/><br/><br/>
         </h:form><br/>
+        
         <p:dataTable value="#{alunoBean.alunos}" var="a" emptyMessage="Tabela Vazia" style="text-align: center; font-size: 15px; width: 850px">
             <p:column headerText="Aluno">#{a.nomealuno}</p:column>
             <p:column headerText="Nome Social">#{a.nomesocial}</p:column>
