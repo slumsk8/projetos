@@ -9,7 +9,7 @@
     <class>br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Anexo</class>
     <class>br.edu.cairu.app.web.integra.cairu.projetos.database.dbclass.Projeto</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pitres"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/pitres"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>
